@@ -15,7 +15,7 @@ import { join } from 'path';
       database: join('/data', 'usuarios.db'),
       entities: [Usuario],
       synchronize: true,
-      name: 'Usuarios',
+      name: 'Usuarios', // nome da conexão
     }),
 
     TypeOrmModule.forRoot({
@@ -23,7 +23,7 @@ import { join } from 'path';
       database: join('/data', 'novasreservas.db'),
       entities: [Reserva],
       synchronize: true,
-      name: 'Reservas',
+      name: 'Reservas', // nome da conexão
     }),
 
     TypeOrmModule.forRoot({
@@ -31,8 +31,13 @@ import { join } from 'path';
       database: join('/data', 'notificacoes.db'),
       entities: [Notificacao],
       synchronize: true,
-      name: 'Notificacoes',
+      name: 'Notificacoes', // nome da conexão
     }),
+
+    // Adicionar as entidades com suas conexões apropriadas
+    TypeOrmModule.forFeature([Usuario], 'Usuarios'),
+    TypeOrmModule.forFeature([Reserva], 'Reservas'),
+    TypeOrmModule.forFeature([Notificacao], 'Notificacoes'),
 
     UsuariosModule,
     ReservaModule,
