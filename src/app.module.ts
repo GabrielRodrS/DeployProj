@@ -10,35 +10,39 @@ import { join } from 'path';
 
 @Module({
   imports: [
+    // Configuração da conexão de 'Usuarios'
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: join('/data', 'usuarios.db'),
+      database: join(__dirname, '..', 'data', 'usuarios.db'), // Usando um caminho relativo
       entities: [Usuario],
       synchronize: true,
-      name: 'Usuarios', // nome da conexão
+      name: 'Usuarios', // Nome da conexão
     }),
 
+    // Configuração da conexão de 'Reservas'
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: join('/data', 'novasreservas.db'),
+      database: join(__dirname, '..', 'data', 'novasreservas.db'), // Usando um caminho relativo
       entities: [Reserva],
       synchronize: true,
-      name: 'Reservas', // nome da conexão
+      name: 'Reservas', // Nome da conexão
     }),
 
+    // Configuração da conexão de 'Notificações'
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: join('/data', 'notificacoes.db'),
+      database: join(__dirname, '..', 'data', 'notificacoes.db'), // Usando um caminho relativo
       entities: [Notificacao],
       synchronize: true,
-      name: 'Notificacoes', // nome da conexão
+      name: 'Notificacoes', // Nome da conexão
     }),
 
-    // Adicionar as entidades com suas conexões apropriadas
+    // Utilizando TypeOrmModule.forFeature para entidades de cada módulo com a respectiva conexão
     TypeOrmModule.forFeature([Usuario], 'Usuarios'),
     TypeOrmModule.forFeature([Reserva], 'Reservas'),
     TypeOrmModule.forFeature([Notificacao], 'Notificacoes'),
 
+    // Módulos específicos do NestJS
     UsuariosModule,
     ReservaModule,
     NotificacaoModule,
