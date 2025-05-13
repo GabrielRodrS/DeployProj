@@ -3,7 +3,7 @@ services:
     name: nest-backend
     env: node
     plan: free
-    buildCommand: npm install && ./node_modules/.bin/nest build
+    buildCommand: npm install && npx nest build
     startCommand: npm run start:prod
     envVars:
       - key: NODE_ENV
