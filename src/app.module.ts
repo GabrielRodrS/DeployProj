@@ -6,12 +6,13 @@ import { Usuario } from './usuario/usuarios.entity';
 import { Reserva } from './reservas/reservas.entity';
 import { NotificacaoModule } from './notif/notif.module';
 import { Notificacao } from './notif/notif.entity';
+import { join } from 'path';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: 'usuarios.db',
+      database: join('/data', 'usuarios.db'),
       entities: [Usuario],
       synchronize: true,
       name: 'Usuarios',
@@ -19,7 +20,7 @@ import { Notificacao } from './notif/notif.entity';
 
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: 'novasreservas.db',
+      database: join('/data', 'novasreservas.db'),
       entities: [Reserva],
       synchronize: true,
       name: 'Reservas',
@@ -27,7 +28,7 @@ import { Notificacao } from './notif/notif.entity';
 
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: 'notificacoes.db',
+      database: join('/data', 'notificacoes.db'),
       entities: [Notificacao],
       synchronize: true,
       name: 'Notificacoes',
