@@ -20,12 +20,21 @@ export class UsuariosService {
     senha: string,
     telefone: string,
   ): Promise<Usuario> {
+    const usuarioExistente = await this.usuarioRepository.findOne({
+      where: { email },
+    });
+
+    if (usuarioExistente) {
+      throw new BadRequestException('Email já está em uso.');
+    }
+
     const usuario = this.usuarioRepository.create({
       nome,
       email,
       senha,
       telefone,
     });
+
     return this.usuarioRepository.save(usuario);
   }
 
