@@ -26,8 +26,14 @@ export class UsuariosController {
     @Body('email') email: string,
     @Body('senha') senha: string,
     @Body('telefone') telefone: string,
-  ): Promise<Usuario> {
-    return this.usuariosService.criarUsuario(nome, email, senha, telefone);
+  ): Promise<{ usuario: Usuario }> {
+    const usuario = await this.usuariosService.criarUsuario(
+      nome,
+      email,
+      senha,
+      telefone,
+    );
+    return { usuario };
   }
 
   @Delete(':id')
