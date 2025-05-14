@@ -6,7 +6,6 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Usuario } from './usuarios.entity';
-import { EmailValidatorService } from '../API Google/email-validator.service';
 
 @Injectable()
 export class UsuariosService {
@@ -21,12 +20,6 @@ export class UsuariosService {
     senha: string,
     telefone: string,
   ): Promise<Usuario> {
-    const isValid = await EmailValidatorService.isValidGoogleEmail(email);
-
-    if (!isValid) {
-      throw new BadRequestException('É necessário ser um e-mail do Google!');
-    }
-
     const usuario = this.usuarioRepository.create({
       nome,
       email,
